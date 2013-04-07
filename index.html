@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <title>Mandelbrot Set Rendering</title>
+  </head>
+
+  <body>
+    <canvas id="mandelbrot" width="400" height="400"></canvas>
+
+    <script src="complex.js"></script>
+    <script src="color.js"></script>
+    <script src="mandelbrot.js"></script>
+    <script>
+      var M = Mandelbrot,
+          canvas = document.getElementById('mandelbrot'),
+          context = canvas.getContext('2d'),
+          image = context.createImageData(canvas.width, canvas.height);
+
+
+      M.drawMandelbrot(image, Complex(-1.00182941, 0.29769173),
+                              Complex(-0.98948373, 0.31265619));
+//      M.drawMandelbrot(image, Complex(-1.5, -1.0),
+//                              Complex(0.5, 1.0));
+      context.putImageData(image, 0, 0);
+    </script>
+  </body>
+</html>
