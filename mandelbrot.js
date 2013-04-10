@@ -17,18 +17,15 @@ ImageData.prototype.setPixel = function(x, y, color) {
 
   /*
    * Get the number of iterations that the function goes through
-   * before repeating. Will be between 1 and 256.
+   * before escaping. Will be between 1 and 256.
    */
-  M.getIterationCount = function(c) {
+  M.getEscapeTime = function(c) {
     var z = new Complex(0), zStr,
-        history = {0: true},
         iterations;
 
     for (iterations = 0; iterations < 256; ++iterations) {
       z = z.times(z).plus(c);
-      zStr = z.toString();
-      if (history[zStr]) break;
-      history[zStr] = true;
+      if (z.abs() > 2) break;
     }
 
     return iterations;
@@ -64,7 +61,7 @@ ImageData.prototype.setPixel = function(x, y, color) {
     for (x = 0; x < im.width; ++x) {
       for (y = 0; y < im.height; ++y) {
         c = new Complex(x*r_factor + min.real, y*i_factor + min.imag);
-        i = M.getIterationCount(c);
+        i = M.getEscapeTime(c);
         im.setPixel(x, y, M.getColor(i));
       }
     }

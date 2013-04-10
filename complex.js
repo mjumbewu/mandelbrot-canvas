@@ -105,6 +105,14 @@ Complex.prototype.over = function(operand) {
 	return this;
 };
 
+Complex.prototype.abs = function() {
+  if (this.imag != 0) {
+    return Math.sqrt(this.real*this.real + this.imag*this.imag);
+  } else {
+    return Math.abs(this.real);
+  }
+};
+
 Complex.prototype.toString = function() {
 	var realStr = this.real.toString();
 
